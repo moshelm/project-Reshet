@@ -22,5 +22,9 @@ class KafkaPublisher():
             self.producer.produce(self.topic, value=data,callback=self.delivery)
             self.producer.poll(0)
         except KafkaException as e:
-            raise f"kafka error. {e}"
-    
+            self.logger.error(f"kafka error. {e}")
+            
+    def close(self):
+        self.logger.info("flushing all messages...")
+        self.producer.flush(5)
+            
