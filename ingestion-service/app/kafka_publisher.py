@@ -1,5 +1,5 @@
 import logging
-from confluent_kafka import Producer, KafkaException
+from confluent_kafka import Message ,Producer, KafkaException
 import json 
 
 class KafkaPublisher():
@@ -7,6 +7,14 @@ class KafkaPublisher():
         self.producer = Producer(bootstrap_servers)
         self.topic = topic_name
         self.logger = logger
+
+    def delivery(self, err : Message, msg : Message):
+        if err is not None:
+            self.logger.error("Delivery failed for Message: {} : {}".format(msg.value(), err))
+            return
+        self.logger.info('Message: {} successfully produced to Topic: {} Partition: [{}] at offset {}'.format(
+         msg.value(), msg.topic(), msg.partition(), msg.offset()))
+
 
     def publish(self, event: dict|str):
         data = json.dumps(event).encode()
