@@ -40,7 +40,7 @@ class MetadataExtractor():
             return None
 
     
-    def metadata_extractor(self, image_path : str) -> dict | None:
+    def extract_metadata(self, image_path : str) -> dict | None:
         try:
             file_size = os.path.getsize(image_path)
             img = Image.open(image_path)
