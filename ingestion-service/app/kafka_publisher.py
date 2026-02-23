@@ -3,8 +3,8 @@ from confluent_kafka import Message ,Producer, KafkaException
 import json 
 
 class KafkaPublisher():
-    def __init__(self, logger: logging.Logger, bootstrap_servers : str, topic_name : str):
-        self.producer = Producer(bootstrap_servers)
+    def __init__(self, logger: logging.Logger, kafka_config : str, topic_name : str):
+        self.producer = Producer(kafka_config)
         self.topic = topic_name
         self.logger = logger
 
