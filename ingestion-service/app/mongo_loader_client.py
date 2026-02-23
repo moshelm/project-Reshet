@@ -10,7 +10,8 @@ class MongoLoaderClient():
     def send(self,file_path:str, image_id:str):
         try:
             response = requests.post(self.mongo_loader_url,data=file_path, params= image_id)
+            self.logger.info("sending to mongo success")
             return response
         except RequestException as e:
-            print(f"failed to send to mongo loader {e}")
+            self.logger.error(f"failed to send to mongo loader {e}")
             return None
