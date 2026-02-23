@@ -1,11 +1,12 @@
 import logging 
 import pytesseract as pt
 from PIL import Image
-
+import os 
+import hashlib
 
 class OCREngine():
-    def __init__(self,image):
-        self.logger = logging.getLogger(__name__)
+    def __init__(self, logger :logging.Logger):
+        self.logger = logger
     
     def extract_text(self,image_path:str):
         try:
