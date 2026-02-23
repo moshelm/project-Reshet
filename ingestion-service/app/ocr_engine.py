@@ -47,7 +47,6 @@ class MetadataExtractor():
             format_file = img.format
             width, height = img.size
             return {
-                "file_id":self.generate_image_id(image_path),
                 "file_name": os.path.basename(image_path),
                 "size_bytes":file_size,
                 "format": format_file,
