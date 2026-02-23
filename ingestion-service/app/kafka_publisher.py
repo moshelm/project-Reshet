@@ -18,9 +18,9 @@ class KafkaPublisher():
 
     def publish(self, event: dict|str):
         data = json.dumps(event).encode()
-        key = "RAW".encode()    
         try:
-            self.producer.produce(self.topic, value=data, key=key)
+            self.producer.produce(self.topic, value=data,callback=self.delivery)
+            self.producer.poll(0)
         except KafkaException as e:
             raise f"kafka error. {e}"
     
