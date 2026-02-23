@@ -1,0 +1,6 @@
+services:
+  oce-service:
+    build: ./ingestion-service
+    container_name: ocr
+    # volumes:
+    #   - data:app/data 
