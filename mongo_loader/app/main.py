@@ -20,6 +20,6 @@ mongo_orchestrator = MongoOrchestrator(mongo_manager,orchestrator_logger)
 
 app = FastAPI()
 
-@app.post("/upload_files")
-def upload(file : UploadFile = File(...)):
-    pass
+@app.post("/upload_files",status_code=200)
+def upload(file : UploadFile = File(...), image_id :str = Form(...)):
+    return mongo_orchestrator.run(file,image_id)
