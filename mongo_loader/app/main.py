@@ -14,6 +14,9 @@ logging.basicConfig(
 manager_logger = logging.getLogger("mongo_manager")
 orchestrator_logger = logging.getLogger("mongo_orchestrator")
 
+logging.getLogger("uvicorn").handlers = logging.getLogger().handlers
+logging.getLogger("uvicorn.access").handlers = logging.getLogger().handlers
+logging.getLogger("fastapi").handlers = logging.getLogger().handlers
 
 mongo_manager = MongoManager(config.mongo_uri,config.mongo_database,manager_logger)
 mongo_orchestrator = MongoOrchestrator(mongo_manager,orchestrator_logger)
