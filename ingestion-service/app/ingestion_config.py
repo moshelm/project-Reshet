@@ -13,7 +13,7 @@ class IngestionConfig():
         self.kafka_topic_name = os.getenv("KAFKA_TOPIC_NAME","RAW")
         self.mongo_loader_url = os.getenv("MONGO_LOADER_URL","http://localhost:27017")
 
-        self.data_files_route = Path("data") / "messaging_images" / "tweet_images"
+        self.data_files_route = Path("/data") / "messaging_images" / "tweet_images"
     
     def validate(self):
         if not self.kafka_config or not self.data_files_route or not self.mongo_loader_url:
