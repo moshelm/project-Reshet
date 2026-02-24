@@ -2,7 +2,7 @@ import logging
 from service_config import MongoConfig
 from fastapi import FastAPI, File, UploadFile, HTTPException, Form
 from mongo_orchestrator import MongoOrchestrator
-from mongo_loader.app.mongo_manager import MongoManager
+from mongo_manager import MongoManager
 config = MongoConfig()
 config.validate()
 
