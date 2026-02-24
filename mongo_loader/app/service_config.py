@@ -1,5 +1,4 @@
 import os 
-import logging 
 
 
 class MongoConfig():
@@ -11,7 +10,7 @@ class MongoConfig():
         self.mongo_uri = f"mongodb://{mongo_host}:{mongo_port}"
         self.log_level = os.getenv("LOG_LEVEL","INFO")
         self.service_name = os.getenv("SERVICE_NAME","mongo")
-        
+
     def validate(self):
         if not self.mongo_uri or not self.log_level or not self.service_name:
             raise "configuration is missing"
