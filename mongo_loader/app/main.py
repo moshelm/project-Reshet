@@ -11,6 +11,12 @@ logging.basicConfig(
     format=f'%(asctime)s | {config.service_name} | %(name)s - %(levelname)s - %(message)s',
     datefmt='%Y-%m-%d %H:%M:%S'
 )
+manager_logger = logging.getLogger("mongo_manager")
+orchestrator_logger = logging.getLogger("mongo_orchestrator")
+
+
+mongo_manager = MongoManager(config.mongo_uri,config.mongo_database,manager_logger)
+mongo_orchestrator = MongoOrchestrator(mongo_manager,orchestrator_logger)
 
 app = FastAPI()
 
