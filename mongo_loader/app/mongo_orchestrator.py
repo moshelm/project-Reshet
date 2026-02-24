@@ -1,5 +1,5 @@
 from logging import Logger
-from mongo_loader.app.mongo_manager import MongoManager
+from mongo_manager import MongoManager
 from fastapi import HTTPException, File, UploadFile, Form
 
 class MongoOrchestrator():
