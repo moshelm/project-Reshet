@@ -1,8 +1,8 @@
 services:
-  oce-service:
+  ocr-service:
     build: ./ingestion-service
     container_name: ocr
     volumes:
-      - ./app:/app
+      - ./ingestion-service/app:/app
       - ./data:/data 
     
