@@ -1,6 +1,6 @@
 import logging 
 from service_config import MongoConfig
-from fastapi import FastAPI, File, UploadFile, HTTPException, Form
+from fastapi import FastAPI, File, UploadFile, Form
 from mongo_orchestrator import MongoOrchestrator
 from mongo_manager import MongoManager
 config = MongoConfig()
