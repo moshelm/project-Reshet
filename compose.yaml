@@ -2,6 +2,9 @@ services:
   ocr-service:
     build: ./ingestion-service
     container_name: ocr
+    env_file:
+      - ./config/.env
+      - ./config/ocr.env
     volumes:
       - ./ingestion-service/app:/app
       - ./data:/data 
