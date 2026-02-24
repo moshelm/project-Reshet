@@ -21,7 +21,7 @@ class IngestionOrchestrator():
             raw_text = self.ocr_engine.extract_text(image_path)
             image_id = self.metadata_extractor.generate_image_id(image_path)
             metadata = self.metadata_extractor.extract_metadata(image_path)
-            self.mongo_client.send(raw_text, image_id)
+            self.mongo_client.send(image_path, image_id)
             event = {
                 "raw_text": raw_text,
                 "image_id": image_id,
