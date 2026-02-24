@@ -4,9 +4,11 @@ import json
 
 class KafkaPublisher():
     def __init__(self, logger: logging.Logger, kafka_config : str, topic_name : str):
+        self.logger = logger
+        kafka_config['logger'] = self.logger
         self.producer = Producer(kafka_config)
         self.topic = topic_name
-        self.logger = logger
+        
 
     def delivery(self, err : Message, msg : Message):
         if err is not None:
