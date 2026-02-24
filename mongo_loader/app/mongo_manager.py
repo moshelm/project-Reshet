@@ -9,7 +9,7 @@ class MongoManager():
         self.logger = logger
         self.client = MongoClient(mongo_uri)
         self.db = self.client[mongo_database]
-        self.bucket = gridfs.GridFSBucket(self.db)
+        self.bucket = gridfs.GridFSBucket(self.db,bucket_name="tweet_images")
 
     def save(self, file_stream: UploadFile = File(...), image_id:str =Form(...)):
         file_name = file_stream.filename
