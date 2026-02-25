@@ -12,13 +12,15 @@ class OCREngine():
         try:
             img = Image.open(image_path)
         except FileNotFoundError as e:
-            self.logger.error("image not found" ,exc_info=e)
+            self.logger.error("not found for extract text",exc_info=e)
+            raise FileNotFoundError("image not found")
         try:
             text = pt.image_to_string(img)
             return text 
         except Exception as e:
-            self.logger.error("failed convert image to string", exc_info=e)
-
+            self.logger.error("failed extract image to string", exc_info=e)
+            raise Exception("failed extract image to string")
+        
 class MetadataExtractor():
     def __init__(self, logger : logging.Logger):
         self.logger = logger
@@ -34,10 +36,10 @@ class MetadataExtractor():
             return hash_id
         except FileNotFoundError as e:
             self.logger.error("not found for generate id",exc_info=e)
-            return None
+            raise FileNotFoundError("image not found")
         except Exception as e:
             self.logger.error("som error in generate",exc_info=e)
-            return None
+            raise Exception("error in generate id")
 
     
     def extract_metadata(self, image_path : str) -> dict | None:
@@ -55,4 +57,8 @@ class MetadataExtractor():
             }
         except FileNotFoundError as e:
             self.logger.error("image not found" ,exc_info=e)
-            return None
+            raise FileNotFoundError("image not found")
+        except Exception as e:
+            self.logger.error("error in metadata extractor" ,exc_info=e)
+            raise Exception("error in metadata extractor")
+            
