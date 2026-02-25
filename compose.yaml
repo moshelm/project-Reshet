@@ -10,7 +10,7 @@ services:
       - ./data:/data 
     depends_on:
       kafka:
-        condition: service_started
+        condition: service_healthy
       mongo:
         condition: service_started
     
@@ -35,6 +35,12 @@ services:
       KAFKA_CONTROLLER_LISTENER_NAMES: CONTROLLER
 
       KAFKA_LOG_DIRS: /tmp/kraft-combined-logs
+
+    healthcheck:
+      test: ["CMD", "nc", "-z", "localhost", "9092"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
 
     volumes:
       - kafka_kraft:/var/lib/kafka/data
