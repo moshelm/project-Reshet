@@ -23,6 +23,7 @@ class KafkaPublisher():
         try:
             self.producer.produce(self.topic, value=data,callback=self.delivery)
             self.producer.poll(0)
+            self.logger.info("finish publish event")
         except KafkaException as e:
             self.logger.error(f"kafka error. {e}")
             
