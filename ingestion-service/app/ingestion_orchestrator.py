@@ -18,6 +18,7 @@ class IngestionOrchestrator():
 
     def process_image(self,image_path:str):
         try: 
+            self.logger.info(f"start process file in path:{image_path}...")
             raw_text = self.ocr_engine.extract_text(image_path)
             image_id = self.metadata_extractor.generate_image_id(image_path)
             metadata = self.metadata_extractor.extract_metadata(image_path)
@@ -28,17 +29,26 @@ class IngestionOrchestrator():
                 "metadata": metadata
             }
             self.publisher.publish(event)
+            
         except Exception as e:
             self.logger.error(f"failed process file {image_path}. {e}", exc_info=True)
-
+            raise Exception(f"failed process file {image_path}.")
     def run(self):
         try: 
+            self.logger.info("start running...")
             images_list = os.listdir(self.config.data_files_route)
             for image_name in images_list:
                 image_path = os.path.join(self.config.data_files_route,image_name)
-                self.process_image(image_path)
-
+                try:
+                    self.process_image(image_path)
+                except (FileNotFoundError, ValueError) as e:
+                    self.logger.error(f"Logic error with file {image_name}: {e}. Skipping...")
+                    continue
+                except Exception as e:
+                    self.logger.critical(f"Infrastructure failure! Stopping pipeline: {e}")
+                    raise e
             self.logger.info("end of program success")
             self.publisher.close()
         except Exception as e:
             self.logger.error(f"failed run all data. {e}", exc_info=True)
+            raise Exception("failed run all data.")
