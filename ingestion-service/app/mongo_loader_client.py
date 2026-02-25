@@ -11,7 +11,8 @@ class MongoLoaderClient():
         try:
             with open(file_path,"br") as file:
                 files = {"file":file}
-                response = requests.post(self.mongo_loader_url,files=files)
+                data = {"image_id":image_id}
+                response = requests.post(self.mongo_loader_url,files=files,data=data)
                 self.logger.info("sending to mongo success")
             return response
         except FileNotFoundError as e:
