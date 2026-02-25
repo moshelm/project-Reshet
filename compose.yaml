@@ -49,8 +49,22 @@ services:
     container_name: mongo
     ports:
       - "27017:27017"
-    
+    volumes:
+      - mongo_data:/data/db
+  mongo_loader:
+    build: ./mongo_loader
+    container_name: mongo_loader 
+    ports:
+      - "8000:8000"
+    env_file:
+      - ./config/mongo_loader.env
+    volumes:
+      - ./mongo_loader/app:/app
+      - ./data:/data 
+    depends_on:
+      mongo:
+        condition: service_started
 
 volumes:
   kafka_kraft:
-    
+  mongo_data:
