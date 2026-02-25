@@ -17,7 +17,7 @@ class MongoLoaderClient():
             return response
         except FileNotFoundError as e:
             self.logger.error(f"file not found to send {e}",exc_info=True)
-            return None
+            raise FileNotFoundError("file not found to send")
         except RequestException as e:
             self.logger.error(f"failed to send to mongo loader {e}",exc_info=True)
-            return None
+            raise RequestException("failed to send to mongo loader")
