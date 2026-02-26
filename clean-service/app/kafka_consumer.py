@@ -13,7 +13,7 @@ class KafkaConsumer():
             self.logger.info("create consumer...")
             self.consumer = Consumer(consumer_config)
             self.logger.info("consumer initialize in success")
-        except KafkaConsumer:
+        except KafkaException:
             self.logger.critical("consumer not work",exc_info=True)
             raise 
         self.topic = topic_name
