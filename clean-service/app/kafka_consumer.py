@@ -1,7 +1,7 @@
 from confluent_kafka import Consumer
 from confluent_kafka.error import KafkaException
 from logging import Logger
-import json 
+from shared.utils import serialize
 
 class KafkaConsumer():
     def __init__(self,kafka_config:str, topic_name:str, group_id:str, logger:Logger):
@@ -30,8 +30,8 @@ class KafkaConsumer():
                 self.logger.error(f"consumer error append. {msg.error()}")
                 continue
             try: 
-                data = json.loads(msg.value().decode())
-            except json.JSONDecodeError:
+                data = serialize.json_deserializer(msg.value)
+            except Exception:
                 self.logger.error("failed get data by json",exc_info=True)
                 raise 
             try:
