@@ -1,7 +1,7 @@
 from confluent_kafka import Consumer
 from confluent_kafka.error import KafkaException
 from logging import Logger
-from shared.utils import serialize
+from shared.utils.serialize import json_deserializer
 
 class KafkaConsumer():
     def __init__(self,kafka_config:str, topic_name:str, group_id:str, logger:Logger):

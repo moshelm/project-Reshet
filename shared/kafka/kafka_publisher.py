@@ -1,6 +1,6 @@
 import logging
 from confluent_kafka import Message ,Producer, KafkaException
-from utils import serialize
+from shared.utils import serialize
 
 class KafkaPublisher():
     def __init__(self, logger: logging.Logger, kafka_config : str, topic_name : str):
