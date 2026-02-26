@@ -39,3 +39,4 @@ class KafkaConsumer():
                 callback(data)
             except Exception:
                 self.logger.error("process failed",exc_info=True)
+                raise
