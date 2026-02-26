@@ -9,6 +9,7 @@ class CleanConfig():
         self.kafka_config = {"bootstrap":f"http:{self.kafka_host}:{self.kafka_port}"}
         self.kafka_topic_name = os.getenv("KAFKA_TOPIC_NAME","raw")
         self.kafka_group_id = os.getenv("GROUP_ID","ddd")
+        self.service_name = os.getenv("SERVICE_NAME","clean")
     def validate(self):
         if not self.kafka_config or not self.data_files_route or not self.mongo_loader_url:
             raise "configuration messing"
