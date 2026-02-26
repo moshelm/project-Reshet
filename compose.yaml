@@ -64,6 +64,21 @@ services:
     depends_on:
       mongo:
         condition: service_started
+  cleaner_service:
+    build: ./clean-service
+    container_name: cleaner_service
+    env_file:
+      - ./config/clean_service.env
+      - ./config/.env
+    volumes:
+      - ./clean-service/app:/app
+      - ./shared:/shared
+    working_dir: /app
+    environment:
+      - PYTHONPATH=/app:/
+    depends_on:
+      kafka:
+        condition: service_healthy
 
 volumes:
   kafka_kraft:
