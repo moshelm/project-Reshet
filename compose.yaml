@@ -71,6 +71,7 @@ services:
       - ./config/clean_service.env
       - ./config/.env
     volumes:
+      - ./clean-service/app:/app
       - ./shared:/shared
     depends_on:
       kafka:
