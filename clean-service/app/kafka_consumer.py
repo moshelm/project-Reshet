@@ -8,7 +8,7 @@ class KafkaConsumer():
         self.logger = logger
         
         consumer_config = kafka_config
-        consumer_config["group_id"] = group_id 
+        consumer_config["group.id"] = group_id 
         try: 
             self.logger.info("create consumer...")
             self.consumer = Consumer(consumer_config)
@@ -30,7 +30,7 @@ class KafkaConsumer():
                 self.logger.error(f"consumer error append. {msg.error()}")
                 continue
             try: 
-                data = serialize.json_deserializer(msg.value)
+                data = json_deserializer(msg.value())
             except Exception:
                 self.logger.error("failed get data by json",exc_info=True)
                 raise 

@@ -23,8 +23,8 @@ orchestrator_logger = logging.getLogger("orchestrator")
 def main():
     try: 
         clean_text = TextCleaner(clean_logger)
-        consumer = KafkaConsumer(config.kafka_config,config.kafka_topic_name,config.kafka_group_id,consumer_logger)
-        publisher = KafkaPublisher(producer_logger,config.kafka_config,config.kafka_topic_name)
+        consumer = KafkaConsumer(config.kafka_config,config.consumer_topic_name,config.kafka_group_id,consumer_logger)
+        publisher = KafkaPublisher(producer_logger,config.kafka_config,config.producer_topic_name)
 
         manager = CleanOrchestrator(consumer,publisher,clean_text,orchestrator_logger)
 
