@@ -64,6 +64,17 @@ services:
     depends_on:
       mongo:
         condition: service_started
+  cleaner_service:
+    build: ./clean-service
+    container_name: cleaner_service
+    env_file:
+      - ./config/clean_service.env
+      - ./config/.env
+    volumes:
+      - ./shared:/shared
+    depends_on:
+      kafka:
+        condition: service_healthy
 
 volumes:
   kafka_kraft:
