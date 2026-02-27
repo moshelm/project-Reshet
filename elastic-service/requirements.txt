@@ -1,0 +1,5 @@
+confluent-kafka==2.13.0
+elastic-transport==8.12.0
+elasticsearch==8.12.0
+pydantic==2.12.5
+pydantic_core==2.41.5
