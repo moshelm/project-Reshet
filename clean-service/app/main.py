@@ -7,7 +7,7 @@ from shared.kafka.kafka_publisher import KafkaPublisher
 
 
 config = CleanConfig()
-
+config.validate()
 
 logger = logging.basicConfig(
     level=config.log_level,

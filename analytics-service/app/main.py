@@ -7,6 +7,7 @@ from shared.kafka.kafka_consumer import KafkaConsumer
 
 
 config = ServiceConfig()
+config.validate()
 
 logger = logging.basicConfig(
     level=config.log_level,

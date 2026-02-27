@@ -4,7 +4,7 @@ from logging import Logger
 from shared.utils.serialize import json_deserializer
 
 class KafkaConsumer():
-    def __init__(self,kafka_config:str, topic_name:str, group_id:str, logger:Logger):
+    def __init__(self,kafka_config:str, topic_name:list[str], group_id:str, logger:Logger):
         self.logger = logger
         
         consumer_config = kafka_config
@@ -21,7 +21,7 @@ class KafkaConsumer():
 
     def start(self,callback):
         self.logger.info("start subscribe")
-        self.consumer.subscribe([self.topic])
+        self.consumer.subscribe(self.topic)
         while True:
             msg = self.consumer.poll()
             if msg is None:
