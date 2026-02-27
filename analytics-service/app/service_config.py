@@ -13,7 +13,7 @@ class ServiceConfig():
         
 
     def validate(self):
-        if not self.kafka_config or not self.data_files_route or not self.mongo_loader_url:
+        if not self.kafka_config :
             raise "configuration messing"
         
 

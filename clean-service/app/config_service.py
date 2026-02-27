@@ -11,7 +11,8 @@ class CleanConfig():
         self.producer_topic_name = os.getenv("PRODUCER_TOPIC_NAME","clean")
         self.kafka_group_id = os.getenv("GROUP_ID","ddd")
         self.service_name = os.getenv("SERVICE_NAME","clean")
+        
     def validate(self):
-        if not self.kafka_config or not self.data_files_route or not self.mongo_loader_url:
+        if not self.kafka_config :
             raise "configuration messing"
         

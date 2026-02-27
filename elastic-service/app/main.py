@@ -5,6 +5,7 @@ from shared.kafka.kafka_consumer import KafkaConsumer
 from es_client import ESClient
 
 config = ServiceConfig()
+config.validate()
 
 logger = logging.basicConfig(
     level=config.log_level,

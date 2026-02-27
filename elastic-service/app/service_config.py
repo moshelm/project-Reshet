@@ -15,6 +15,7 @@ class ServiceConfig():
 
         self.es_uri = f'http://{es_host}:{es_port}'
         self.index_name = os.getenv("INDEX_NAME","all_data")
+        
     def validate(self):
         if not self.kafka_config :
             raise "configuration messing"
