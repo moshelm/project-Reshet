@@ -15,6 +15,7 @@ class Orchestrator():
             self.logger.info("start analyze...")
             info = self.analyzer.analyze(data['clean_text'])
             self.logger.info("publish new event...")
+            info["image_id"] = data["image_id"]
             self.publisher.publish(info)
         except Exception:
             self.logger.error("error from handel")
